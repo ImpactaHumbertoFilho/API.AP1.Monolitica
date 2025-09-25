@@ -10,6 +10,7 @@ def get_professores():
     session: Session = SessionLocal()
     professores = session.query(Professor).all()
     session.close()
+    
     return jsonify([{"id": p.id, "nome": p.nome, "materia": p.materia} for p in professores])
 
 @professor_bp.route("/<int:id>", methods=["GET"])
@@ -17,8 +18,10 @@ def get_professor(id):
     session: Session = SessionLocal()
     professor = session.query(Professor).get(id)
     session.close()
+    
     if professor:
         return jsonify({"id": professor.id, "nome": professor.nome, "materia": professor.materia})
+    
     return jsonify({"error": "Professor não encontrado"}), 404
 
 @professor_bp.route("/", methods=["POST"])
