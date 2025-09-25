@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-from src.config.base import Base
+from ..config.base import Base
 
 
 class Turma(Base):

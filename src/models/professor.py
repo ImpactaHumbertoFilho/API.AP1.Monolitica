@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text
 from sqlalchemy.orm import relationship
-from src.config.base import Base
+from ..config.base import Base
 
 
 class Professor(Base):

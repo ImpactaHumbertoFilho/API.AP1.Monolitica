@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from sqlalchemy.orm import Session
-from src.config.base import SessionLocal
-from src.models.professor import Professor
+from ..config.base import SessionLocal
+from ..models.professor import Professor
 
 professor_bp = Blueprint("professor", __name__)
 

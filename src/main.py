@@ -1,8 +1,8 @@
-from src.config.base import Base, engine
-from src.models import Professor, Turma, Aluno
+from .config.base import Base, engine
+from .models import Professor, Turma, Aluno
 from flask import Flask
 
-from src.controllers.professor_controller import professor_bp
+from .controllers.professor_controller import professor_bp
 
 def create_app():
     app = Flask(__name__)

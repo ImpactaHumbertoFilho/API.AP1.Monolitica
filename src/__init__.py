@@ -1,2 +1,1 @@
-# Este arquivo marca o diretório src como um pacote Python
-# permitindo importações relativas a partir deste diretório
+# Este arquivo marca o diretório como um pacote Python
