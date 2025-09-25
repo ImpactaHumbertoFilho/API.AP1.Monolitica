@@ -1,15 +1,27 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from config.base import Base
-from models.professor import Professor
-from models.turma import Turma
-from models.aluno import Aluno
+from src.config.base import Base, engine
+from src.models import Professor, Turma, Aluno
+from flask import Flask
 
-# Engine centralizado
-engine = create_engine("sqlite:///meu_banco.db", echo=True)
+from src.controllers.professor_controller import professor_bp
 
-# Session factory
-SessionLocal = sessionmaker(bind=engine)
+def create_app():
+    app = Flask(__name__)
 
-# Cria todas as tabelas no banco
-Base.metadata.create_all(bind=engine)
+    # Config do banco (exemplo com SQLite, pode trocar por PostgreSQL/MySQL)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///meu_banco.db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    # Cria as tabelas
+    Base.metadata.create_all(bind=engine)
+
+    # Importa e registra os blueprints (controllers)
+    app.register_blueprint(professor_bp, url_prefix="/professores")
+    # app.register_blueprint(turma_bp, url_prefix="/turmas")
+    # app.register_blueprint(aluno_bp, url_prefix="/alunos")
+
+    return app
+
+
+if __name__ == "__main__":
+    app = create_app()
+    app.run(debug=True)
