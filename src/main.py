@@ -3,6 +3,8 @@ from .models import Professor, Turma, Aluno
 from flask import Flask
 
 from .controllers.professor_controller import professor_bp
+from .controllers.aluno_controller import aluno_bp
+from .controllers.turma_controller import turma_bp
 
 def create_app():
     app = Flask(__name__)
@@ -16,8 +18,8 @@ def create_app():
 
     # Importa e registra os blueprints (controllers)
     app.register_blueprint(professor_bp, url_prefix="/professores")
-    # app.register_blueprint(turma_bp, url_prefix="/turmas")
-    # app.register_blueprint(aluno_bp, url_prefix="/alunos")
+    app.register_blueprint(aluno_bp, url_prefix="/alunos")
+    app.register_blueprint(turma_bp, url_prefix="/turmas")
 
     return app
 
