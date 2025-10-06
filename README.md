@@ -38,16 +38,48 @@ API monolítica desenvolvida como uma forma de avaliação AP1. O objetivo é pr
 
 ## Como Executar
 
-Execute o aplicativo de uma das formas abaixo:
+### Usando Docker (Recomendado)
 
-- Usando o arquivo `run.py` (recomendado):
-  ```bash
-  python run.py
-  ```
-- Ou diretamente como módulo Python:
-  ```bash
-  python -m src.main
-  ```
+1. Certifique-se de ter o Docker e Docker Compose instalados em sua máquina.
+
+2. Clone o repositório e navegue até a pasta do projeto:
+   ```bash
+   git clone https://github.com/ImpactaHumbertoFilho/API.AP1.Monolitica
+   cd API.AP1.Monolitica
+   ```
+
+3. Execute o projeto usando Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
+
+4. A API estará disponível em:
+   - API: http://localhost:5000
+   - Documentação Swagger: http://localhost:5000/apidocs
+
+Para parar o container:
+```bash
+docker-compose down
+```
+
+### Executando Localmente
+
+Se preferir executar localmente sem Docker:
+
+1. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Execute o aplicativo de uma das formas abaixo:
+   - Usando o arquivo `run.py` (recomendado):
+     ```bash
+     python run.py
+     ```
+   - Ou diretamente como módulo Python:
+     ```bash
+     python -m src.main
+     ```
 
 O servidor será iniciado em `http://localhost:5000`.
 
