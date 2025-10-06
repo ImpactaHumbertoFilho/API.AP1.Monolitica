@@ -2,10 +2,19 @@ from flask import Blueprint, request, jsonify
 from sqlalchemy.orm import Session, joinedload
 from ..config.base import SessionLocal
 from ..models import Turma
+from flasgger import swag_from
+from ..docs.turma_docs import (
+    list_turmas,
+    get_turma,
+    create_turma,
+    update_turma,
+    delete_turma
+)
 
 turma_bp = Blueprint("turma", __name__)
 
 @turma_bp.route("/", methods=["GET"])
+@swag_from(list_turmas)
 def get_turmas():
     session: Session = SessionLocal()
     try:
@@ -19,6 +28,7 @@ def get_turmas():
         session.close()
 
 @turma_bp.route("/<int:id>", methods=["GET"])
+@swag_from(get_turma)
 def get_turma(id:int):
     session: Session = SessionLocal()
     turma = session.query(Turma).options(
@@ -33,6 +43,7 @@ def get_turma(id:int):
     return jsonify({"error": "Turma não encontrada"}), 404
 
 @turma_bp.route("/", methods=["POST"])
+@swag_from(create_turma)
 def create_turma():
     data = request.json
     
@@ -51,6 +62,7 @@ def create_turma():
     return jsonify({"id": turma.id, "message": "Turma criada com sucesso!"}), 201
 
 @turma_bp.route("/<int:id>", methods=["PUT"])
+@swag_from(update_turma)
 def update_turma(id:int):
     data = request.json
     session: Session = SessionLocal()
@@ -71,6 +83,7 @@ def update_turma(id:int):
     return jsonify({"id": turma.id, "message": "Turma atualizada com sucesso!"})
 
 @turma_bp.route("/<int:id>", methods=["DELETE"])
+@swag_from(delete_turma)
 def delete_turma(id:int):
     session: Session = SessionLocal()
     
@@ -104,7 +117,7 @@ def formata_turma(turma:Turma):
             "nota_segundo_semestre": aluno.nota_segundo_semestre,
             "media_final": aluno.media_final
         })
-        
+    
     return {
         "id": turma.id,
         "descricao": turma.descricao,

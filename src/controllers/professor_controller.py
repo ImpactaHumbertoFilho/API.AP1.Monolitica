@@ -2,10 +2,19 @@ from flask import Blueprint, request, jsonify
 from sqlalchemy.orm import Session, joinedload
 from ..config.base import SessionLocal
 from ..models.professor import Professor
+from flasgger import swag_from
+from ..docs.professor_docs import (
+    list_professors,
+    get_professor,
+    create_professor,
+    update_professor,
+    delete_professor
+)
 
 professor_bp = Blueprint("professor", __name__)
 
 @professor_bp.route("/", methods=["GET"])
+@swag_from(list_professors)
 def get_professores():
     session: Session = SessionLocal()
     try:
@@ -23,6 +32,7 @@ def get_professores():
         session.close()
 
 @professor_bp.route("/<int:id>", methods=["GET"])
+@swag_from(get_professor)
 def get_professor(id):
     session: Session = SessionLocal()
     try:
@@ -44,6 +54,7 @@ def get_professor(id):
         session.close()
 
 @professor_bp.route("/", methods=["POST"])
+@swag_from(create_professor)
 def create_professor():
     data = request.json
     session: Session = SessionLocal()
@@ -64,6 +75,7 @@ def create_professor():
         session.close()
 
 @professor_bp.route("/<int:id>", methods=["PUT"])
+@swag_from(update_professor)
 def update_professor(id):
     data = request.json
     session: Session = SessionLocal()
@@ -86,6 +98,7 @@ def update_professor(id):
         session.close()
 
 @professor_bp.route("/<int:id>", methods=["DELETE"])
+@swag_from(delete_professor)
 def delete_professor(id):
     session: Session = SessionLocal()
     
