@@ -4,9 +4,9 @@ Projeto de AP1 para a matéria de Desenvolvimento de API.
 
 # Integrantes
 
-Humberto Lisboa Leite Filho (RA: 2402662)
-Melissa Moura Ferreira (RA: 2403008)
-Jullya Mendonça Brandão Nigro (RA: 2402577)
+- Humberto Lisboa Leite Filho (RA: 2402662)
+- Melissa Moura Ferreira (RA: 2403008)
+- Jullya Mendonça Brandão Nigro (RA: 2402577)
 
 ## Sumário
 
